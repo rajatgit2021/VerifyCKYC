@@ -29,7 +29,7 @@ public class JavaApiApplicationController {
 
         byte[]  data = JavaApiApplicationBeans.generateSessionKey();
 
-        @RequestMapping(method = RequestMethod.POST, value="/ ")
+        @RequestMapping(method = RequestMethod.POST, value="/encryptUsingSessionKey")
         @ResponseBody
         public OutputData encryptUsingSessionKey (@RequestBody InputData inputData) throws InvalidCipherTextException, IOException, GeneralSecurityException {
             OutputData outputData1 = new OutputData();
