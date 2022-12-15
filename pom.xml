@@ -8,11 +8,11 @@
         <version>2.7.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.rajat04</groupId>
-    <artifactId>spring-azure-demo4</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-azure-demo4</name>
-    <description>spring-azure-demo4</description>
+    <name>demo</name>
+    <description>demo</description>
     <properties>
         <java.version>11</java.version>
     </properties>
