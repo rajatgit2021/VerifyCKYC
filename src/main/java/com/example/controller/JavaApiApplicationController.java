@@ -31,7 +31,7 @@ public class JavaApiApplicationController {
 
         @RequestMapping(method = RequestMethod.POST, value="/encryptUsingSessionKey")
         @ResponseBody
-        public OutputData encryptUsingSessionKey (@RequestBody InputData inputData) throws InvalidCipherTextException, IOException, GeneralSecurityException {
+        public OutputData encryptUsingSessionKey (@RequestBody InputData inputData) throws InvalidCipherTextException, IOException, GeneralSecurityException, URISyntaxException {
             OutputData outputData1 = new OutputData();
             outputData1.setEncryptUsingSessionKey(JavaApiApplicationBeans.encryptUsingSessionKey(data,inputData.getData()));
             JavaApiApplicationBeans.CkycEncryptionUtil();
