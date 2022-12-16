@@ -54,36 +54,32 @@ public final class JavaApiApplicationBeans {
     }
 
     public static void CkycEncryptionUtil() throws NoSuchAlgorithmException, NoSuchProviderException {
-       // String path = "D:\\Code_Cersai_public_cert_requestdetails\\server_pub.cer"
-      // URL publicKeyFileName = JavaApiApplicationBeans.class.getClassLoader().getResource("server_pub.cer");
-       // File publicKeyFileName = new File("demo/src/main/resources/server_pub.cer");
-       // String publicKeyFileName = file.getAbsolutePath();
-     //  ClassLoader classLoader = JavaApiApplicationBeans.class.getClassLoader();
-     //   URL publicKeyFileName = classLoader.getResource("server_pub.cer");
-        ClassLoader classLoader = JavaApiApplicationBeans.class.getClassLoader();
-        File publicKeyFileName = new File(classLoader.getResource("server_pub.cer").getFile());
+       ClassLoader classLoader = JavaApiApplicationBeans.class.getClassLoader();
+        String fileName = "server_pub.cer";
+        URL resource = classLoader.getResource(fileName);
 
+        System.out.println("getResource : " + fileName);
+        File file = new File(resource.toURI());
+        System.out.println(file.toString());
 
-        System.out.println(publicKeyFileName.toString());
-
-        InputStream fileInputStream = null;
+        InputStream is = null;
         try {
             CertificateFactory certFactory = CertificateFactory.getInstance(
                     "X.509", "BC");
             System.out.println("hello");
-            fileInputStream = new FileInputStream(publicKeyFileName);
+            is = new FileInputStream(file);
             System.out.println("hello2");
             X509Certificate cert = (X509Certificate) certFactory
-                    .generateCertificate(fileInputStream);
+                    .generateCertificate(is);
             publicKey = cert.getPublicKey();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Could not intialize encryption module",
+            throw new RuntimeException("Could not initialize encryption module",
                     e);
         } finally {
-            if (fileInputStream != null)
+            if (is != null)
                 try {
-                    fileInputStream.close();
+                    is.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
