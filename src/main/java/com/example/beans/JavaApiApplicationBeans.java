@@ -53,7 +53,7 @@ public final class JavaApiApplicationBeans {
         return encryptedpid;
     }
 
-    public static void CkycEncryptionUtil() throws NoSuchAlgorithmException, NoSuchProviderException {
+    public static void CkycEncryptionUtil() throws NoSuchAlgorithmException, NoSuchProviderException, URISyntaxException  {
        ClassLoader classLoader = JavaApiApplicationBeans.class.getClassLoader();
         String fileName = "server_pub.cer";
         URL resource = classLoader.getResource(fileName);
