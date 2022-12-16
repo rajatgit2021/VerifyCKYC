@@ -2,7 +2,6 @@ package com.example.beans;
 
 import java.io.*;
 import java.net.URL;
-import java.net.URISyntaxException;
 import java.security.*;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -54,33 +53,39 @@ public final class JavaApiApplicationBeans {
         return encryptedpid;
     }
 
-    public static void CkycEncryptionUtil() throws NoSuchAlgorithmException, NoSuchProviderException, URISyntaxException  {
-       ClassLoader classLoader = JavaApiApplicationBeans.class.getClassLoader();
+    public static void CkycEncryptionUtil() throws NoSuchAlgorithmException, NoSuchProviderException {
         String fileName = "server_pub.cer";
-        URL resource = classLoader.getResource(fileName);
+       // String path = "D:\\Code_Cersai_public_cert_requestdetails\\server_pub.cer"
+      // URL publicKeyFileName = JavaApiApplicationBeans.class.getClassLoader().getResource("server_pub.cer");
+       // File publicKeyFileName = new File("demo/src/main/resources/server_pub.cer");
+       // String publicKeyFileName = file.getAbsolutePath();
+     //  ClassLoader classLoader = JavaApiApplicationBeans.class.getClassLoader();
+     //   URL publicKeyFileName = classLoader.getResource("server_pub.cer");
+        ClassLoader classLoader = JavaApiApplicationBeans.class.getClassLoader();
+        //File publicKeyFileName = new File(classLoader.getResource("server_pub.cer").getFile());
 
-        System.out.println("getResource : " + fileName);
-        File file = new File(resource.toURI());
-        System.out.println(file.toString());
+        InputStream inputStream = null;
 
-        InputStream is = null;
+       // System.out.println("InputStream: "+inputStream.toString());
+
+        //InputStream fileInputStream = null;
         try {
             CertificateFactory certFactory = CertificateFactory.getInstance(
                     "X.509", "BC");
             System.out.println("hello");
-            is = new FileInputStream(file);
+            inputStream = classLoader.getResourceAsStream(fileName);
             System.out.println("hello2");
             X509Certificate cert = (X509Certificate) certFactory
-                    .generateCertificate(is);
+                    .generateCertificate(inputStream);
             publicKey = cert.getPublicKey();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Could not initialize encryption module",
                     e);
         } finally {
-            if (is != null)
+            if (inputStream != null)
                 try {
-                    is.close();
+                    inputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
