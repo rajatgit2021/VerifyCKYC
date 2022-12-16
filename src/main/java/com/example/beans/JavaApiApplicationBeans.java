@@ -2,6 +2,7 @@ package com.example.beans;
 
 import java.io.*;
 import java.net.URL;
+import java.net.URISyntaxException;
 import java.security.*;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
